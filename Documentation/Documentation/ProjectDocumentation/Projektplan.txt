@@ -1,0 +1,18 @@
+Projektplan:
+
+Projekt Setup
+	google drive pics
+
+schlechtes Licht, schlechte Quali, schlechte Kontrast
+	eigene Bilder machen und unterschiede festellen
+
+Bildentzerrung
+	verschiedene Winkel, wo merkt man einen Unterschied
+
+OpenCV library kennenlernen
+
+Kennzeichen herausschneiden
+
+python API (spring)
+
+Zeichen herausschneiden
