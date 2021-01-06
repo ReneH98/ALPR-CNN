@@ -71,4 +71,4 @@ def extract_LP(image_name,base_model_name):
     plt.imshow(copy)
     plt.show()
 
-extract_LP('test.png','base_model.h5')
+extract_LP('test.png','models/model1.h5')
