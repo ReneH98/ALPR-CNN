@@ -2,3 +2,4 @@ tensorflow==2.4.0
 keras==2.2.4
 numpy==1.19.4
 opencv-python==4.5.1.48
+opencv-contrib-python==4.5.1.48
