@@ -17,11 +17,13 @@ def extract_LP(image_name,model):
     print("Cropped: ", nw, " ", nh)
 
     image = compute_img[int(0.1*nh) : int(0.9*nh), int(0.1*nw) : int(0.9*nw)]
-
+    import time
+    start_time = time.time()
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
     ss.switchToSelectiveSearchFast()
     results = ss.process()
+    print("SS init - ss.process: ", time.time() - start_time)
     copy = image.copy()
     copy2 = image.copy()
     positive_boxes = []
@@ -39,7 +41,9 @@ def extract_LP(image_name,model):
         class_pred = model.predict_classes(roi_use)[0][0]
 
         if class_pred == 1:
+            start_time = time.time()
             prob = model.predict(roi_use)[0][0]
+            print("model.predict if plate: ", time.time() - start_time)
             if prob > 0.98:
                 positive_boxes.append([x1,y1,x2,y2])
                 probs.append(prob)
