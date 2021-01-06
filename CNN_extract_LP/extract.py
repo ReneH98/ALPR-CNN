@@ -4,7 +4,7 @@ import numpy as np
 from helper_functions import load_data,non_max_suppression_fast
 from tensorflow.keras.models import load_model
 
-def extract_LP(image_name,base_model_name):
+def extract_LP(image_name,model):
     original_img = cv2.imread(image_name)
     h, w, _ = original_img.shape
 
@@ -18,7 +18,6 @@ def extract_LP(image_name,base_model_name):
 
     image = compute_img[int(0.1*nh) : int(0.9*nh), int(0.1*nw) : int(0.9*nw)]
 
-    model = load_model(base_model_name)
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
     ss.switchToSelectiveSearchFast()
@@ -56,6 +55,7 @@ def extract_LP(image_name,base_model_name):
         total_boxes+=1
         cv2.rectangle(copy,(clean_x1,clean_y1),(clean_x2,clean_y2),(0,255,0),3)
 
+
         y1 = int((clean_y1 + 0.1*nh) / nh * h)
         y2 = int((clean_y2 + 0.1*nh) / nh * h)
         x1 = int((clean_x1 + 0.1*nw) / nw * w)
@@ -72,6 +72,15 @@ def extract_LP(image_name,base_model_name):
     plt.imshow(copy)
     plt.show()
 
-pic = "../pics/Pictures_FH2/32.png"
-pic = "test.png"
-extract_LP(pic,'models/model1.h5')
+model = load_model('models/model_eu_only_15epochs.h5')
+
+# pic = "../pics/Pictures_FH2/32.png"
+# pic = "test.png"
+# extract_LP(pic,model)
+
+pic_dir = '../pics/Pictures_FH2'
+
+import os
+pics = os.listdir(pic_dir)
+for pic in pics:
+    extract_LP(pic_dir + "/" + pic,model)

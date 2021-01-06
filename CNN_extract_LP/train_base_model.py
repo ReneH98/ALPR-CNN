@@ -5,7 +5,7 @@ import models
 from tensorflow.keras.optimizers import Adam
 
 def main():
-    X,y = load_data('use_data_eu')
+    X,y = load_data('use_data_only_eu')
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3) #use fit so will use validation_split
 
     model = models.get_model_1(input_shape=(128,128,3))

@@ -4,16 +4,18 @@ import PIL.Image as Image
 from helper_functions import read_pascal,compute_iou
 
 def main():
-    car_save_path = 'use_data_eu/plate/'
-    no_car_save_path = 'use_data_eu/not_plate/'
+    car_save_path = 'use_data_only_eu/plate/'
+    no_car_save_path = 'use_data_only_eu/not_plate/'
+
+    data_dir = 'data_eu_only/'
 
     total_not_car = 0
     total_car = 0
-    for file in os.listdir('data/'):
+    for file in os.listdir(data_dir):
         if '.png' in file:
-            name,box_list = read_pascal('data/'+file.split('.')[0]+'.xml')
+            name,box_list = read_pascal(data_dir+file.split('.')[0]+'.xml')
             ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
-            pic = cv2.imread('data/'+file)
+            pic = cv2.imread(data_dir+file)
             pic_copy = pic.copy()
 
             ss.setBaseImage(pic)
