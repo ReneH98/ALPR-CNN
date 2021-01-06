@@ -1,10 +1,5 @@
 import cv2
-import matplotlib.pyplot as plt
-import pandas as pd
 import os
-import seaborn as sns
-import xml.etree.ElementTree as ET
-import numpy as np
 import PIL.Image as Image
 from helper_functions import read_pascal,compute_iou
 
@@ -33,7 +28,6 @@ def main():
                 image_roi = pic_copy[found_box[1]:found_box[3]+found_box[1],found_box[0]:found_box[0]+found_box[2]]
                 iou = compute_iou(found_box_use,box_list[0]) #its a nested list, so we take the 1st element
                 print(iou)
-                print('THERE')
                 if iou>0.7:
                     if car_count < 16: #don't have enough memory for too many
 
