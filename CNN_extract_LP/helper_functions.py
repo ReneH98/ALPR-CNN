@@ -1,11 +1,6 @@
 import cv2
-import matplotlib.pyplot as plt
-import pandas as pd
-import os
-import seaborn as sns
 import xml.etree.ElementTree as ET
 import numpy as np
-import PIL.Image as Image
 from sklearn.datasets import load_files
 
 def read_pascal(xml_file: str):

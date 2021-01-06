@@ -1,18 +1,8 @@
-import tensorflow
-import cv2
-import matplotlib.pyplot as plt
-import pandas as pd
-import os
-import seaborn as sns
-import xml.etree.ElementTree as ET
 import numpy as np
-import PIL.Image as Image
-from sklearn.datasets import load_files
 from sklearn.model_selection import train_test_split
 from helper_functions import load_data
 import models
 from tensorflow.keras.optimizers import Adam
-#----
 
 def main():
     X,y = load_data()
