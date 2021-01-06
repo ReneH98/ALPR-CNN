@@ -1,7 +1,5 @@
 import tensorflow as tf
 from tensorflow.keras.layers import Conv2D,MaxPool2D,Dropout,Flatten,Dense
-#from tensorflow.keras.optimizers import Adam
-#----
 
 def get_model_1(input_shape):
     model = tf.keras.Sequential(name="LP_extraction")
