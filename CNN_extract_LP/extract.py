@@ -4,8 +4,9 @@ import numpy as np
 from helper_functions import load_data,non_max_suppression_fast
 from tensorflow.keras.models import load_model
 
-def extract_LP(image_name, model, model_name=""):
-    original_img = cv2.imread(image_name)
+def extract_LP(image_path, image_name, model, model_name=""):
+    print("Processing: ", image_name)
+    original_img = cv2.imread(image_path + image_name)
     h, w, _ = original_img.shape
 
     print("Original: ", w, " ", h)
@@ -20,7 +21,8 @@ def extract_LP(image_name, model, model_name=""):
 
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
-    ss.switchToSelectiveSearchFast(base_k=250, inc_k=250)
+    ss.switchToSelectiveSearchFast(base_k=550, inc_k=550)
+    #ss.switchToSelectiveSearchFast()
     results = ss.process()
     copy = image.copy()
     copy2 = image.copy()
@@ -72,16 +74,29 @@ def extract_LP(image_name, model, model_name=""):
     #plt.imshow(copy2)
     #plt.imshow(copy)
     #plt.show()
-    cv2.imwrite("output/" + model_name + image_name.split("/")[3], copy)
+    cv2.imwrite("output/" + image_name.split(".")[0] + model_name + ".png", copy)
 
-model = load_model('models/model_eu_only_15epochs.h5')
-#model = load_model('models/model1.h5')
-#pic = "../pics/Pictures_FH2/36.png"
-#extract_LP(pic, model, "model2_")
+model_1 = load_model('models/model1.h5')
+model_2 = load_model('models/model2.h5')
+model_eu = load_model('models/model_eu_only.h5')
+model_eu_15 = load_model('models/model_eu_only_15epochs.h5')
 
+pic = "05.png"
+pic_dir = "../pics/Pictures_FH2/"
 
+extract_LP(pic_dir + "/", pic, model_1, "_1")
+extract_LP(pic_dir + "/", pic, model_2, "_2")
+extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
+extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")
+
+"""
 pic_dir = '../pics/Pictures_FH2'
 import os
 pics = os.listdir(pic_dir)
 for pic in pics:
-    extract_LP(pic_dir + "/" + pic, model, "model1_")
+    if pic.endswith(".png"):
+        extract_LP(pic_dir + "/", pic, model_1, "_1")
+        extract_LP(pic_dir + "/", pic, model_2, "_2")
+        extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
+        extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")
+"""
