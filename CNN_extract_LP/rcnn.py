@@ -13,7 +13,15 @@ import models
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 
-def rcnn(image,base_model_name):
+def extract_LP(image_name,base_model_name):
+    original_img = cv2.imread(image_name)
+    og_shape = original_img.shape
+
+    compute_img = cv2.resize(original_img, (800, 480))
+    h, w, _ = compute_img.shape
+
+    image = compute_img[int(0.1*h) : int(0.9*h), int(0.1*w) : int(0.9*w)]
+
     model = load_model(base_model_name)
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
@@ -51,17 +59,16 @@ def rcnn(image,base_model_name):
         clean_y2 = clean_box[3]
         total_boxes+=1
         cv2.rectangle(copy,(clean_x1,clean_y1),(clean_x2,clean_y2),(0,255,0),3)
+        
+        #print(clean_x1, " ", clean_x2, " ", clean_y1, " ", clean_y2)
+
+        cropped = image[clean_y1:clean_y2, clean_x1: clean_x2]
+        cv2.imshow("possible LP", cropped)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
     #plt.imshow(copy2)
     plt.imshow(copy)
     plt.show()
 
-def main(image_name,model_name):
-    test_img = cv2.imread(image_name)
-    test_img = cv2.resize(test_img, (800, 480))
-    
-    h, w, _ = test_img.shape
-    test_img = test_img[int(0.1*h) : int(0.9*h), int(0.1*w) : int(0.9*w)]
-
-    rcnn(image=test_img,base_model_name=model_name)
-
-main('test.png','base_model.h5')
+extract_LP('test.png','base_model.h5')
