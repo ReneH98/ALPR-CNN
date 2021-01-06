@@ -4,8 +4,8 @@ import PIL.Image as Image
 from helper_functions import read_pascal,compute_iou
 
 def main():
-    car_save_path = 'use_data/plate/'
-    no_car_save_path = 'use_data/not_plate/'
+    car_save_path = 'use_data_eu/plate/'
+    no_car_save_path = 'use_data_eu/not_plate/'
 
     total_not_car = 0
     total_car = 0

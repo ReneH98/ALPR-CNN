@@ -48,8 +48,8 @@ def compute_iou(boxA, boxB):
     return iou
 
 
-def load_data():
-    data = load_files('use_data')
+def load_data(directory_name):
+    data = load_files(directory_name)
     filenames = data['filenames']
     targets = data['target']
     target_names = data['target_names']

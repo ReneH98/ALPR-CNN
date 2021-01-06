@@ -24,9 +24,18 @@ input("> ")
 newfilelist = os.listdir('data/')
 
 to_rename = [e for e in newfilelist if e not in filelist]
+to_rename = [e for e in to_rename if ".png" in e]
 
+maxcount += 1
 for filename in to_rename:
     maxcount += 1
-    fileending = filename.split(".")[-1]
-    os.rename("data/" + filename,"data/Cars" + str(maxcount) + "." + fileending)
+    helper = filename.split(".")
+    fname = helper[0]
+    fileending = helper[-1]
+    #rename the png file
+    os.rename("data/" + fname + ".png", "data/Cars" + str(maxcount) + ".png")
+    print(fname + ".png -> " + "Cars" + str(maxcount) + ".png")
+    #rename the corresponding xml file
+    os.rename("data/" + fname + ".xml", "data/Cars" + str(maxcount) + ".xml")
+    print(fname + ".xml -> " + "Cars" + str(maxcount) + ".xml")
 

@@ -64,14 +64,14 @@ def extract_LP(image_name,base_model_name):
         x2 = int((clean_x2 + 0.1*nw) / nw * w)
         cropped = original_img[y1 : y2, x1: x2]
     
-        cv2.imshow("cropped", cropped)
-        cv2.waitKey(0)
-        cv2.imshow("cropped2", cropped2)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.imshow("cropped", cropped)
+        # cv2.waitKey(0)
+        # cv2.imshow("cropped2", cropped2)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
 
     #plt.imshow(copy2)
     plt.imshow(copy)
     plt.show()
 
-extract_LP('test.png','models/model1.h5')
+extract_LP('test.png','models/model2.h5')
