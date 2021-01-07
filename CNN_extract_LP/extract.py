@@ -8,25 +8,18 @@ def extract_LP(image_path, image_name, model, model_name=""):
     print("Processing: ", image_name)
     original_img = cv2.imread(image_path + image_name)
     h, w, _ = original_img.shape
-
-    print("Original: ", w, " ", h)
+    #print("Original: ", w, " ", h)
 
     new_height = 480
     compute_img = cv2.resize(original_img, (int(w/h*new_height), new_height))
-
     nh, nw, _ = compute_img.shape
-    print("Cropped: ", nw, " ", nh)
+    #print("Cropped: ", nw, " ", nh)
 
     image = compute_img[int(0.1*nh) : int(0.9*nh), int(0.1*nw) : int(0.9*nw)]
 
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
-<<<<<<< HEAD
     ss.switchToSelectiveSearchFast(base_k=550,inc_k=550)
-=======
-    ss.switchToSelectiveSearchFast(base_k=550, inc_k=550)
-    #ss.switchToSelectiveSearchFast()
->>>>>>> 15e59cb417abaf790e8f7141fc796bba3f7b6975
     results = ss.process()
     copy = image.copy()
     copy2 = image.copy()
@@ -80,29 +73,21 @@ def extract_LP(image_path, image_name, model, model_name=""):
     #plt.show()
     cv2.imwrite("output/" + image_name.split(".")[0] + model_name + ".png", copy)
 
-<<<<<<< HEAD
+#model = load_model('models/model_with_eu_15epochs.h5')
 #model_1 = load_model('models/model1.h5')
 #model_2 = load_model('models/model2.h5')
 #model_eu = load_model('models/model_eu_only.h5')
-=======
-<<<<<<< HEAD
-model = load_model('models/model_with_eu_15epochs.h5')
-=======
-model_1 = load_model('models/model1.h5')
-model_2 = load_model('models/model2.h5')
-model_eu = load_model('models/model_eu_only.h5')
->>>>>>> 997e92756bcc6dbb558fe6853d7d8226ecf6e5d2
 model_eu_15 = load_model('models/model_eu_only_15epochs.h5')
->>>>>>> 15e59cb417abaf790e8f7141fc796bba3f7b6975
 
-#pic = "05.png"
-#pic_dir = "../pics/Pictures_FH2/"
+pic = "05.png"
+pic_dir = "../pics/Pictures_FH2/"
 
 #extract_LP(pic_dir + "/", pic, model_1, "_1")
 #extract_LP(pic_dir + "/", pic, model_2, "_2")
 #extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
-#extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")
+extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")
 
+"""
 pic_dir = '../pics/Pictures_FH2'
 import os
 pics = os.listdir(pic_dir)
@@ -112,4 +97,6 @@ for pic in pics:
         #extract_LP(pic_dir + "/", pic, model_1, "_1")
         #extract_LP(pic_dir + "/", pic, model_2, "_2")
         #extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
-        extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15_300")
+        #extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15_300")
+        extract_LP(pic_dir + "/", pic, model, "_all15")
+"""
