@@ -21,12 +21,8 @@ def extract_LP(image_path, image_name, model, model_name=""):
 
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
-<<<<<<< HEAD
-    ss.switchToSelectiveSearchFast(base_k=550,inc_k=550)
-=======
     ss.switchToSelectiveSearchFast(base_k=550, inc_k=550)
     #ss.switchToSelectiveSearchFast()
->>>>>>> 15e59cb417abaf790e8f7141fc796bba3f7b6975
     results = ss.process()
     copy = image.copy()
     copy2 = image.copy()
@@ -80,14 +76,10 @@ def extract_LP(image_path, image_name, model, model_name=""):
     #plt.show()
     cv2.imwrite("output/" + image_name.split(".")[0] + model_name + ".png", copy)
 
-<<<<<<< HEAD
-model = load_model('models/model_with_eu_15epochs.h5')
-=======
 model_1 = load_model('models/model1.h5')
 model_2 = load_model('models/model2.h5')
 model_eu = load_model('models/model_eu_only.h5')
 model_eu_15 = load_model('models/model_eu_only_15epochs.h5')
->>>>>>> 15e59cb417abaf790e8f7141fc796bba3f7b6975
 
 pic = "05.png"
 pic_dir = "../pics/Pictures_FH2/"
