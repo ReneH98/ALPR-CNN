@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,pycharm
 
 CNN_extract_LP/output/*
+pics/images/*
 
 ### macOS ###
 # General
