@@ -4,8 +4,9 @@ import numpy as np
 from helper_functions import load_data,non_max_suppression_fast
 from tensorflow.keras.models import load_model
 
-def extract_LP(image_name,model):
-    original_img = cv2.imread(image_name)
+def extract_LP(image_path, image_name, model, model_name=""):
+    print("Processing: ", image_name)
+    original_img = cv2.imread(image_path + image_name)
     h, w, _ = original_img.shape
 
     print("Original: ", w, " ", h)
@@ -17,17 +18,22 @@ def extract_LP(image_name,model):
     print("Cropped: ", nw, " ", nh)
 
     image = compute_img[int(0.1*nh) : int(0.9*nh), int(0.1*nw) : int(0.9*nw)]
-    import time
-    start_time = time.time()
+
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
+<<<<<<< HEAD
     ss.switchToSelectiveSearchFast(base_k=550,inc_k=550)
+=======
+    ss.switchToSelectiveSearchFast(base_k=550, inc_k=550)
+    #ss.switchToSelectiveSearchFast()
+>>>>>>> 15e59cb417abaf790e8f7141fc796bba3f7b6975
     results = ss.process()
-    print("SS init - ss.process: ", time.time() - start_time)
     copy = image.copy()
     copy2 = image.copy()
     positive_boxes = []
     probs = []
+
+    print("Process boxes: ", len(results))
 
     for box in results:
         x1 = box[0]
@@ -41,9 +47,7 @@ def extract_LP(image_name,model):
         class_pred = model.predict_classes(roi_use)[0][0]
 
         if class_pred == 1:
-            start_time = time.time()
             prob = model.predict(roi_use)[0][0]
-            print("model.predict if plate: ", time.time() - start_time)
             if prob > 0.98:
                 positive_boxes.append([x1,y1,x2,y2])
                 probs.append(prob)
@@ -59,7 +63,6 @@ def extract_LP(image_name,model):
         total_boxes+=1
         cv2.rectangle(copy,(clean_x1,clean_y1),(clean_x2,clean_y2),(0,255,0),3)
 
-
         y1 = int((clean_y1 + 0.1*nh) / nh * h)
         y2 = int((clean_y2 + 0.1*nh) / nh * h)
         x1 = int((clean_x1 + 0.1*nw) / nw * w)
@@ -73,18 +76,35 @@ def extract_LP(image_name,model):
         # cv2.destroyAllWindows()
 
     #plt.imshow(copy2)
-    plt.imshow(copy)
-    plt.show()
+    #plt.imshow(copy)
+    #plt.show()
+    cv2.imwrite("output/" + image_name.split(".")[0] + model_name + ".png", copy)
 
+<<<<<<< HEAD
 model = load_model('models/model_with_eu_15epochs.h5')
+=======
+model_1 = load_model('models/model1.h5')
+model_2 = load_model('models/model2.h5')
+model_eu = load_model('models/model_eu_only.h5')
+model_eu_15 = load_model('models/model_eu_only_15epochs.h5')
+>>>>>>> 15e59cb417abaf790e8f7141fc796bba3f7b6975
 
-# pic = "../pics/Pictures_FH2/32.png"
-# pic = "test.png"
-# extract_LP(pic,model)
+pic = "05.png"
+pic_dir = "../pics/Pictures_FH2/"
 
+extract_LP(pic_dir + "/", pic, model_1, "_1")
+extract_LP(pic_dir + "/", pic, model_2, "_2")
+extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
+extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")
+
+"""
 pic_dir = '../pics/Pictures_FH2'
-
 import os
 pics = os.listdir(pic_dir)
 for pic in pics:
-    extract_LP(pic_dir + "/" + pic,model)
+    if pic.endswith(".png"):
+        extract_LP(pic_dir + "/", pic, model_1, "_1")
+        extract_LP(pic_dir + "/", pic, model_2, "_2")
+        extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
+        extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")
+"""
