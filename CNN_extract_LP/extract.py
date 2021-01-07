@@ -21,7 +21,7 @@ def extract_LP(image_name,model):
     start_time = time.time()
     ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
     ss.setBaseImage(image)
-    ss.switchToSelectiveSearchFast()
+    ss.switchToSelectiveSearchFast(base_k=550,inc_k=550)
     results = ss.process()
     print("SS init - ss.process: ", time.time() - start_time)
     copy = image.copy()
@@ -76,7 +76,7 @@ def extract_LP(image_name,model):
     plt.imshow(copy)
     plt.show()
 
-model = load_model('models/model_eu_only_15epochs.h5')
+model = load_model('models/model_with_eu_15epochs.h5')
 
 # pic = "../pics/Pictures_FH2/32.png"
 # pic = "test.png"
