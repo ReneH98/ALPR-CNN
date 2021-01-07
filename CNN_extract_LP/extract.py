@@ -74,13 +74,13 @@ def extract_LP(image_path, image_name, model, model_name=""):
     #plt.show()
     cv2.imwrite("output/" + image_name.split(".")[0] + model_name + ".png", copy)
 
-model_1 = load_model('models/model1.h5')
-model_2 = load_model('models/model2.h5')
-model_eu = load_model('models/model_eu_only.h5')
+#model_1 = load_model('models/model1.h5')
+#model_2 = load_model('models/model2.h5')
+#model_eu = load_model('models/model_eu_only.h5')
 model_eu_15 = load_model('models/model_eu_only_15epochs.h5')
 
-pic = "05.png"
 pic_dir = "../pics/Pictures_FH2/"
+pic = "05.png"
 
 #extract_LP(pic_dir + "/", pic, model_1, "_1")
 #extract_LP(pic_dir + "/", pic, model_2, "_2")
