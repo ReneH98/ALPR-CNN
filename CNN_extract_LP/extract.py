@@ -78,15 +78,14 @@ def extract_LP(image_path, image_name, model, model_name=""):
 #model_eu = load_model('models/model_eu_only.h5')
 model_eu_15 = load_model('models/model_eu_only_15epochs.h5')
 
-pic_dir = "../pics/images/"
-pic = "134.png"
+#pic_dir = "../pics/Pictures_FH2/"
+#pic = "134.png"
 
 #extract_LP(pic_dir + "/", pic, model_1, "_1")
 #extract_LP(pic_dir + "/", pic, model_2, "_2")
 #extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
-extract_LP(pic_dir + "/", pic, model_eu_15, "_test")
+#extract_LP(pic_dir + "/", pic, model_eu_15, "_test")
 
-"""
 pic_dir = '../pics/Pictures_FH2'
 import os
 pics = os.listdir(pic_dir)
@@ -96,6 +95,4 @@ for pic in pics:
         #extract_LP(pic_dir + "/", pic, model_1, "_1")
         #extract_LP(pic_dir + "/", pic, model_2, "_2")
         #extract_LP(pic_dir + "/", pic, model_eu, "_eu8")
-        #extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15_300")
-        extract_LP(pic_dir + "/", pic, model_eu_15, "_test")     
-"""
+        extract_LP(pic_dir + "/", pic, model_eu_15, "_eu15")     
