@@ -1,18 +1,7 @@
 Projektplan:
 
-Projekt Setup
-	google drive pics
+1: Python Optimierungen für Laufzeit
 
-schlechtes Licht, schlechte Quali, schlechte Kontrast
-	eigene Bilder machen und unterschiede festellen
+2: Test Bilder erzeugen / suchen und richtig annotieren
 
-Bildentzerrung
-	verschiedene Winkel, wo merkt man einen Unterschied
-
-OpenCV library kennenlernen
-
-Kennzeichen herausschneiden
-
-python API (spring)
-
-Zeichen herausschneiden
+3: Neuronales Netzwerk aufsetzen und erster Start
